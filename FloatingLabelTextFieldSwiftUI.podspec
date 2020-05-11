@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FloatingLabelTextFieldSwiftUI'
-  s.version          = '2.0.1'
+  s.version          = '3.0.0'
   s.summary          = 'A beautiful floating label textfield library written in SwiftUI.'
 
 # This description is used to generate tags and improve search results.
