@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'FloatingLabelTextFieldSwiftUI_Example' do
+  pod 'FloatingLabelTextFieldSwiftUI', :path => '../'
+
+  target 'FloatingLabelTextFieldSwiftUI_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
