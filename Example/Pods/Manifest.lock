@@ -1,0 +1,16 @@
+PODS:
+  - FloatingLabelTextFieldSwiftUI (0.1.0)
+
+DEPENDENCIES:
+  - FloatingLabelTextFieldSwiftUI (from `../`)
+
+EXTERNAL SOURCES:
+  FloatingLabelTextFieldSwiftUI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FloatingLabelTextFieldSwiftUI: 13a8dc898deb9a6dc00a92fc38ad54daacfff6c1
+
+PODFILE CHECKSUM: 1d492ab90cedd45c2169a52444eb492f5ae66dbf
+
+COCOAPODS: 1.9.1

@@ -1,0 +1,6 @@
+framework module FloatingLabelTextFieldSwiftUI {
+  umbrella header "FloatingLabelTextFieldSwiftUI-umbrella.h"
+
+  export *
+  module * { export * }
+}

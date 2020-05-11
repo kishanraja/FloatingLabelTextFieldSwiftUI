@@ -1,0 +1,22 @@
+{
+  "name": "FloatingLabelTextFieldSwiftUI",
+  "version": "0.1.0",
+  "summary": "A short description of FloatingLabelTextFieldSwiftUI.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "kishanraja": "rajakishanrk1996@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "FloatingLabelTextFieldSwiftUI/Classes/**/*"
+}
