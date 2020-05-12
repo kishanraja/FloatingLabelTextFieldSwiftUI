@@ -5,6 +5,17 @@
 [![License](https://img.shields.io/cocoapods/l/FloatingLabelTextFieldSwiftUI.svg?style=flat)](https://cocoapods.org/pods/FloatingLabelTextFieldSwiftUI)
 [![Platform](https://img.shields.io/cocoapods/p/FloatingLabelTextFieldSwiftUI.svg?style=flat)](https://cocoapods.org/pods/FloatingLabelTextFieldSwiftUI)
 
+
+ FloatingLabelTextFieldSwiftUI is a small and lightweight SwiftUI framework that allows to create beautiful and customisable floating label textfield!
+
+<p float="left">
+    <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/master/Graphics/FloatingLabelTextFieldSwiftUI.gif">
+
+</p>
+
+If you like the project, please do not forget to `star ★` this repository and follow me on GitHub.
+
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
