@@ -1,6 +1,6 @@
 {
   "name": "FloatingLabelTextFieldSwiftUI",
-  "version": "2.0.1",
+  "version": "3.1.0",
   "summary": "A beautiful floating label textfield library written in SwiftUI.",
   "description": "FloatingLabelTextField is a small and lightweight SwiftUI framework that allows to create beautiful and customisable floating label textfield!",
   "homepage": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI",
@@ -13,13 +13,13 @@
   },
   "source": {
     "git": "https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI.git",
-    "tag": "2.0.1"
+    "tag": "3.1.0"
   },
   "social_media_url": "https://twitter.com/RajaKishan4",
   "platforms": {
     "ios": "13.0"
   },
-  "source_files": "Source/**/*.swift",
+  "source_files": "Sources/**/*.swift",
   "swift_versions": "5.0",
   "swift_version": "5.0"
 }

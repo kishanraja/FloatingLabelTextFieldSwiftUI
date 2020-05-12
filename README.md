@@ -13,12 +13,25 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
+### CocoaPods:
+
 FloatingLabelTextFieldSwiftUI is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'FloatingLabelTextFieldSwiftUI'
 ```
+
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+To integrate `FloatingLabelTextFieldSwiftUI` into your Xcode project using Xcode 11+, specify it in `File > Swift Packages > Add`:
+
+```ogdl
+https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI.git
+```
+
 
 ## Author
 
