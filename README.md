@@ -79,7 +79,7 @@ struct ContentView: View {
 ```
 #### FloatingLabelTextFieldStyle
 
-Just two step for create and add style to text field. 
+Just two step for create and add style to FloatingLabelTextField. 
 
 1. Create your own theme style. Set property as per your theme.
 
@@ -124,8 +124,8 @@ struct ContentView: View {
 }
 ```
 
-#### Secure Text Entry
-To enable Secure Text Entry sets, .isSecureTextEntry(true)
+### Secure Text Entry
+To enable Secure Text Entry use .isSecureTextEntry(true) property. 
 
 <p float="left">
     <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/secure_text_field.gif">
@@ -151,8 +151,8 @@ struct ContentView: View {
 }
 ```
 
-#### Left - Right View
-Yes, you can easily add your own views, buttons or image to left view or right view of the text field.
+### Left - Right View
+Yes, you can easily add your own views, buttons or image to left view or right view of the FloatingLabelTextField.
 
 <p float="left">
     <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/left-right-view.gif">
@@ -172,10 +172,10 @@ struct ContentView: View {
             
         }
         .isSecureTextEntry(!self.isPasswordShow)
-            .leftView({ // Adds left view.
+            .leftView({ // Add left view.
                 Image("password")
             })
-            .rightView({ // Adds right view.
+            .rightView({ // Add right view.
                 Button(action: {
                     withAnimation {
                         self.isPasswordShow.toggle()

@@ -133,13 +133,13 @@ extension FloatingLabelTextField {
 //MARK: View Property Funcation
 @available(iOS 13.0, *)
 extension FloatingLabelTextField {
-    /// Adds left view.
+    /// Sets the left view.
     public func leftView<LRView: View>(@ViewBuilder _ view: @escaping () -> LRView) -> Self {
         notifier.leftView = AnyView(view())
         return self
     }
     
-    /// Adds right view.
+    /// Sets the right view.
     public func rightView<LRView: View>(@ViewBuilder _ view: @escaping () -> LRView) -> Self {
         notifier.rightView = AnyView(view())
         return self
