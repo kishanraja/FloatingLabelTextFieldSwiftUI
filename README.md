@@ -9,7 +9,7 @@
 FloatingLabelTextFieldSwiftUI is a small and lightweight SwiftUI framework written in completely swiftUI (not using UIViewRepresentable) that allows to create beautiful and customisable floating label textfield! This library support RTL text (eg. Arabic) and easy to add left view and right view to your text field and customizable.
 
 <p float="left">
-    <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/FloatingLabelTextFieldSwiftUI.gif">
+    <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/FloatingLabelTextFieldSwiftUI.gif" width="350" height="623" >
 
 </p>
 
