@@ -210,6 +210,12 @@ extension FloatingLabelTextField {
         notifier.titleFont = font
         return self
     }
+    
+    /// Sets the space between title and text.
+    public func spaceBetweenTitleText(_ space: Double) -> Self {
+        notifier.spaceBetweenTitleText = space
+        return self
+    }
 }
 
 //MARK: Text Property Funcation
