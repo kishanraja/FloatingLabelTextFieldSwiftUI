@@ -201,7 +201,6 @@ FloatingLabelTextFieldSwiftUI also have some inbuilt validation regex checker fi
 Here is some example
 
 1. Email Validation
-
 <p float="left">
     <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/email_validation.gif">
 
@@ -245,8 +244,8 @@ struct ContentView: View {
 }
 ```
 
-2. Name Validation
 
+2. Name Validation
 <p float="left">
     <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/name_validation.gif">
 
