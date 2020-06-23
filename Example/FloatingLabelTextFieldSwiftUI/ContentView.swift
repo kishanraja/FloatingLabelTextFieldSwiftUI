@@ -15,9 +15,27 @@ struct ContentView: View {
     @State private var lastName: String = ""
     @State private var mobileNumber: String = ""
     @State private var email: String = ""
+    @State private var isValidEmail: Bool = false
     @State private var password: String = ""
+    @State private var date: Date = Date()
+    @State private var birthDate: String = ""
+    @State private var showDatePicker: Bool = false
     
     @State private var isPasswordShow: Bool = false
+    
+    private var selectedDate: Binding<Date> {
+        Binding<Date>(get: { self.date}, set : {
+            self.date = $0
+            self.setDateFormatterString()
+        })
+    }
+    
+    private func setDateFormatterString() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd - MMMM, yyyy"
+        
+        self.birthDate = formatter.string(from: self.date)
+    }
     
     var body: some View {
         VStack {
@@ -28,8 +46,12 @@ struct ContentView: View {
                 }) {
                     
                 }
-                .floatingStyle(ThemeTextFieldStyle())
-                .modifier(ThemeTextField())
+                .isShowError(true)
+                .addValidations([.init(condition: firstName.isValid(.alphabet), errorMessage: "Invalid Name"),
+                                 .init(condition: firstName.count >= 2, errorMessage: "Minimum two character long")
+                ])
+                    .floatingStyle(ThemeTextFieldStyle())
+                    .modifier(ThemeTextField())
                 
                 
                 FloatingLabelTextField($lastName, placeholder: "Last Name", editingChanged: { (isChanged) in
@@ -37,8 +59,24 @@ struct ContentView: View {
                 }) {
                     
                 }
-                .floatingStyle(ThemeTextFieldStyle2())
-                .modifier(ThemeTextField())
+                .isShowError(true)
+                .addValidations([.init(condition: lastName.isValid(.alphabet), errorMessage: "Invalid Name"),
+                                 .init(condition: lastName.count >= 2, errorMessage: "Minimum two character long")
+                ])
+                    .floatingStyle(ThemeTextFieldStyle2())
+                    .modifier(ThemeTextField())
+            }
+            
+            FloatingLabelTextField($birthDate, placeholder: "Birth Date", editingChanged: { (isChanged) in
+                self.showDatePicker = isChanged
+            }) {
+                
+            }
+            .modifier(ThemeTextField())
+            
+            if showDatePicker {
+                DatePicker("", selection: selectedDate,
+                           displayedComponents: .date)
             }
             
             FloatingLabelTextField($mobileNumber, placeholder: "Phone Number", editingChanged: { (isChanged) in
@@ -48,14 +86,16 @@ struct ContentView: View {
             }
             .keyboardType(.phonePad)
             .modifier(ThemeTextField())
-            
-            FloatingLabelTextField($email, placeholder: "Email", editingChanged: { (isChanged) in
+            FloatingLabelTextField($email, validtionChecker: $isValidEmail, placeholder: "Email", editingChanged: { (isChanged) in
                 
             }) {
                 
             }
-            .keyboardType(.emailAddress)
-            .modifier(ThemeTextField())
+            .addValidations([.init(condition: email.isValid(.email), errorMessage: "Invalid Email")
+            ])
+                .isShowError(true)
+                .keyboardType(.emailAddress)
+                .modifier(ThemeTextField())
             
             FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in
                 
@@ -78,6 +118,14 @@ struct ContentView: View {
             //            Text(password)
             Button(action: {
                 self.endEditing(true)
+                
+                if self.isValidEmail {
+                    print("Valid field")
+                    
+                } else {
+                    print("Invalid field")
+                }
+                
             }) {
                 Text("Create")
             }
@@ -94,13 +142,13 @@ struct ContentView: View {
 //MARK: Create floating style
 struct ThemeTextFieldStyle: FloatingLabelTextFieldStyle {
     func body(content: FloatingLabelTextField) -> FloatingLabelTextField {
-        content.titleColor(.red)
+        content.titleColor(.black)
     }
 }
 
 struct ThemeTextFieldStyle2: FloatingLabelTextFieldStyle {
     func body(content: FloatingLabelTextField) -> FloatingLabelTextField {
-        content.titleColor(.green)
+        content.titleColor(.black).errorColor(.init(UIColor.green))
     }
 }
 

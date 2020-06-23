@@ -41,4 +41,9 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     //MARK: Other Properties
     @Published var spaceBetweenTitleText: Double = 15
     @Published var isSecureTextEntry: Bool = false
+    
+    //MARK: Error Properties
+    @Published var isShowError: Bool = false
+    @Published var errorColor: Color = .red
+    @Published var arrValidator: [TextFieldValidator] = []
 }

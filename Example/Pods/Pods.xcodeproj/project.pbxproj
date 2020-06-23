@@ -13,6 +13,8 @@
 		1EC95B678A0CEB64339DCD6A7282A499 /* Pods-FloatingLabelTextFieldSwiftUI_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 33B87B774B6B67EE2736D0B3DF2074CC /* Pods-FloatingLabelTextFieldSwiftUI_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25B2FD0FCD64AE18FB6BDD266758D3CB /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1447985B68B4F254BA91FE835F50987 /* View+Extension.swift */; };
 		529AC9170C1266E4CED03C7D4EF38DB8 /* TextAlignment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0E7DDCE1229A3A81653C4B0845FE /* TextAlignment+Extension.swift */; };
+		5D3CE01F249BC5CE003DC54C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE01E249BC5CE003DC54C /* String+Extension.swift */; };
+		5D3CE056249BDB50003DC54C /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE055249BDB50003DC54C /* Validator.swift */; };
 		69330D52C647DC65452DE8BE13D6E743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		74863C5D4183CE32FDEBC4C8111967E4 /* Pods-FloatingLabelTextFieldSwiftUI_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EB532DD9194AA050448BC8BE4B6F100B /* Pods-FloatingLabelTextFieldSwiftUI_Tests-dummy.m */; };
 		78DCFBBED4CA94D1B49926ED23ACB7D1 /* UIControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88957F8945597CD27821C0E7AD2B450 /* UIControl+Extension.swift */; };
@@ -42,9 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		08352AAD8A2E6FACB0846B9EF61199D0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		0F265636405B4704A69D9B2B958E03B4 /* FloatingLabelTextFieldSwiftUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FloatingLabelTextFieldSwiftUI.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		2085E560DBC07477383DC0170312E29B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		08352AAD8A2E6FACB0846B9EF61199D0 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0F265636405B4704A69D9B2B958E03B4 /* FloatingLabelTextFieldSwiftUI.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = FloatingLabelTextFieldSwiftUI.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2085E560DBC07477383DC0170312E29B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2576CA6743DBD278D07BF77002228968 /* Pods-FloatingLabelTextFieldSwiftUI_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FloatingLabelTextFieldSwiftUI_Example-dummy.m"; sourceTree = "<group>"; };
 		2A1C0E7DDCE1229A3A81653C4B0845FE /* TextAlignment+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TextAlignment+Extension.swift"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -52,13 +54,15 @@
 		379E19BC27CAD1B499B2626FA17DF32F /* Pods-FloatingLabelTextFieldSwiftUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FloatingLabelTextFieldSwiftUI_Example.release.xcconfig"; sourceTree = "<group>"; };
 		4EFE66E7FD8BADD7412A7F69C1AD9FE0 /* FloatingLabelTextFieldSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FloatingLabelTextFieldSwiftUI.debug.xcconfig; sourceTree = "<group>"; };
 		50DC2CB7FBD71A7CBF3786E72FF53A49 /* UIResponder+Extesnion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extesnion.swift"; sourceTree = "<group>"; };
+		5D3CE01E249BC5CE003DC54C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		5D3CE055249BDB50003DC54C /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		5DA2B90C9EF9C267037122FCBFFC32FB /* Pods-FloatingLabelTextFieldSwiftUI_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FloatingLabelTextFieldSwiftUI_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		86A69F4F3096C8F4DEF7164078CE3E30 /* FloatingLabelTextFieldSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FloatingLabelTextFieldSwiftUI.framework; path = FloatingLabelTextFieldSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86A69F4F3096C8F4DEF7164078CE3E30 /* FloatingLabelTextFieldSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FloatingLabelTextFieldSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FBD2D598C9F0F52E54A8E7820D2877C /* Pods-FloatingLabelTextFieldSwiftUI_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FloatingLabelTextFieldSwiftUI_Tests-Info.plist"; sourceTree = "<group>"; };
 		9158B5E60774F307FC287D2307E4A17E /* Pods-FloatingLabelTextFieldSwiftUI_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FloatingLabelTextFieldSwiftUI_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		964F4088B401ACCC9879144150636345 /* ObservableObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		9717BD50521A42A36A027377A5F8D88E /* Pods-FloatingLabelTextFieldSwiftUI_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FloatingLabelTextFieldSwiftUI_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A1447985B68B4F254BA91FE835F50987 /* View+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		A66F6EFBA7A2FF5E4F3E354280068E89 /* FloatingLabelTextFieldSwiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FloatingLabelTextFieldSwiftUI.release.xcconfig; sourceTree = "<group>"; };
 		A6ED3E022A8C4476D628C203A738F814 /* Pods-FloatingLabelTextFieldSwiftUI_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FloatingLabelTextFieldSwiftUI_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -66,12 +70,12 @@
 		AE9186A6BA0B8358AB5B6DFFA1E9F9E9 /* FloatingLabelTextFieldSwiftUI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FloatingLabelTextFieldSwiftUI-dummy.m"; sourceTree = "<group>"; };
 		BBAE5643B708D6D6FAA6C8705BE24979 /* FloatingLabelTextFieldSwiftUI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FloatingLabelTextFieldSwiftUI-prefix.pch"; sourceTree = "<group>"; };
 		C2D1D4053A7F3486EC71C8CAD7ABFC39 /* Pods-FloatingLabelTextFieldSwiftUI_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FloatingLabelTextFieldSwiftUI_Example.modulemap"; sourceTree = "<group>"; };
-		C39E0E7B66FC87CD98B5722E71EC598E /* Pods_FloatingLabelTextFieldSwiftUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FloatingLabelTextFieldSwiftUI_Tests.framework; path = "Pods-FloatingLabelTextFieldSwiftUI_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C39E0E7B66FC87CD98B5722E71EC598E /* Pods_FloatingLabelTextFieldSwiftUI_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FloatingLabelTextFieldSwiftUI_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C720DB79CD940C5191AAF9E8849778BF /* FloatingLabelTextFieldSwiftUI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FloatingLabelTextFieldSwiftUI.modulemap; sourceTree = "<group>"; };
 		C93C627C88DC3D28875A3D229AB6ED4C /* Pods-FloatingLabelTextFieldSwiftUI_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FloatingLabelTextFieldSwiftUI_Tests.modulemap"; sourceTree = "<group>"; };
 		D0226F1148958C267735A53677AC4E48 /* Pods-FloatingLabelTextFieldSwiftUI_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FloatingLabelTextFieldSwiftUI_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D2250C0BC386E22EA82073CDDD920C70 /* Pods-FloatingLabelTextFieldSwiftUI_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FloatingLabelTextFieldSwiftUI_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		D62B2968F7942E8B9BCC6758997EE9CF /* Pods_FloatingLabelTextFieldSwiftUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FloatingLabelTextFieldSwiftUI_Example.framework; path = "Pods-FloatingLabelTextFieldSwiftUI_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D62B2968F7942E8B9BCC6758997EE9CF /* Pods_FloatingLabelTextFieldSwiftUI_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FloatingLabelTextFieldSwiftUI_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88957F8945597CD27821C0E7AD2B450 /* UIControl+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
 		D8C18C8E9433C5AC2717795605C0635D /* FloatingLabelTextFieldSwiftUI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FloatingLabelTextFieldSwiftUI-umbrella.h"; sourceTree = "<group>"; };
 		DFFD1EEC3C54E6D1974BE0B7FE6812A2 /* Pods-FloatingLabelTextFieldSwiftUI_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FloatingLabelTextFieldSwiftUI_Example-Info.plist"; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 				D88957F8945597CD27821C0E7AD2B450 /* UIControl+Extension.swift */,
 				50DC2CB7FBD71A7CBF3786E72FF53A49 /* UIResponder+Extesnion.swift */,
 				A1447985B68B4F254BA91FE835F50987 /* View+Extension.swift */,
+				5D3CE01E249BC5CE003DC54C /* String+Extension.swift */,
 			);
 			name = Extensions;
 			path = Sources/FloatingLabelTextFieldSwiftUI/Extensions;
@@ -139,6 +144,15 @@
 			);
 			name = ObservableObject;
 			path = Sources/FloatingLabelTextFieldSwiftUI/ObservableObject;
+			sourceTree = "<group>";
+		};
+		5D3CE054249BDB4F003DC54C /* TextFieldValidator */ = {
+			isa = PBXGroup;
+			children = (
+				5D3CE055249BDB50003DC54C /* Validator.swift */,
+			);
+			name = TextFieldValidator;
+			path = Sources/FloatingLabelTextFieldSwiftUI/TextFieldValidator;
 			sourceTree = "<group>";
 		};
 		6F8B90393B1133D7854837F6CF129691 /* Development Pods */ = {
@@ -196,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				ABFC5BCA7A2DAFDD187AC5E37E878676 /* FloatingLabelTextField.swift */,
+				5D3CE054249BDB4F003DC54C /* TextFieldValidator */,
 				257DD4D8C4A99FEDDC956E108854186D /* Extensions */,
 				50B9E512C60058FE92580A1233B46547 /* ObservableObject */,
 				73FAB3BB879DB5CFED5D691F05A4D0C7 /* Pod */,
@@ -416,6 +431,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D3CE01F249BC5CE003DC54C /* String+Extension.swift in Sources */,
+				5D3CE056249BDB50003DC54C /* Validator.swift in Sources */,
 				EA1534356550BCA26D1F0E3A4316A6D1 /* FloatingLabelTextField.swift in Sources */,
 				B23D4D22E076BF2B1EE653CF63738C28 /* FloatingLabelTextFieldSwiftUI-dummy.m in Sources */,
 				0C6A91CB7E7B145CC7B93D895A7CA575 /* ObservableObject.swift in Sources */,
@@ -497,8 +514,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

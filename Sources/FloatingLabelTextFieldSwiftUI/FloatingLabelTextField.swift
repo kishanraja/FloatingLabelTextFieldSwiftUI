@@ -21,6 +21,13 @@ public struct FloatingLabelTextField: View {
     //MARK: Binding Property
     @Binding private var textFieldValue: String
     @State fileprivate var isSelected: Bool = false
+    @Binding private var validtionChecker: Bool
+    private var currentError: TextFieldValidator {
+        if let firstError = notifier.arrValidator.filter({!$0.condition}).first {
+            return firstError
+        }
+        return TextFieldValidator(condition: true, errorMessage: "")
+    }
     
     //MARK: Observed Object
     @ObservedObject private var notifier = FloatingLabelTextFieldNotifier()
@@ -31,12 +38,12 @@ public struct FloatingLabelTextField: View {
     private var commit: () -> () = { }
     
     //MARK: Init
-    public init(_ text: Binding<String>, placeholder: String = "", editingChanged: @escaping (Bool)->() = { _ in }, commit: @escaping ()->() = { }) {
+    public init(_ text: Binding<String>, validtionChecker: Binding<Bool>? = nil, placeholder: String = "", editingChanged: @escaping (Bool)->() = { _ in }, commit: @escaping ()->() = { }) {
         self._textFieldValue = text
         self.placeholderText = placeholder
         self.editingChanged = editingChanged
         self.commit = commit
-        
+        self._validtionChecker = validtionChecker ?? Binding.constant(false)
     }
     
     // MARK: Center View
@@ -54,6 +61,7 @@ public struct FloatingLabelTextField: View {
                 SecureField("", text: $textFieldValue.animation()) {
                 }
                 .onTapGesture {
+                    self.validtionChecker = self.currentError.condition
                     self.editingChanged(self.isSelected)
                     if !self.isSelected {
                         UIResponder.currentFirstResponder?.resignFirstResponder()
@@ -70,22 +78,29 @@ public struct FloatingLabelTextField: View {
                 }
                 .font(notifier.font)
                 .multilineTextAlignment(notifier.textAlignment)
-                .foregroundColor(isSelected ? notifier.selectedTextColor : notifier.textColor)
+                .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
                 
             } else {
                 TextField("", text: $textFieldValue.animation(), onEditingChanged: { (isChanged) in
                     self.isSelected = isChanged
+                    self.validtionChecker = self.currentError.condition
                     self.editingChanged(isChanged)
                     
                 }, onCommit: {
-                    print("onCommit")
+                    self.validtionChecker = self.currentError.condition
                     self.commit()
                 })
                     .multilineTextAlignment(notifier.textAlignment)
                     .font(notifier.font)
-                    .foregroundColor(isSelected ? notifier.selectedTextColor : notifier.textColor)
+                    .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
             }
         }
+    }
+    
+    // MARK: Bottom Line View
+    var bottomLine: some View {
+        Divider()
+            .frame(height: self.isSelected ? notifier.selectedLineHeight : notifier.lineHeight, alignment: .leading)
     }
     
     //MARK: Body View
@@ -93,10 +108,10 @@ public struct FloatingLabelTextField: View {
         VStack () {
             ZStack(alignment: .bottomLeading) {
                 
-                Text(placeholderText)
+                Text((self.currentError.condition || !notifier.isShowError) ? placeholderText : self.currentError.errorMessage)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: notifier.textAlignment.getAlignment())
                     .animation(.default)
-                    .foregroundColor( self.isSelected ? notifier.selectedTitleColor : notifier.titleColor)
+                    .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor) : notifier.errorColor)
                     .padding(.bottom, CGFloat(!textFieldValue.isEmpty ? notifier.spaceBetweenTitleText : 0))
                     .opacity(textFieldValue.isEmpty ? 0 : 1)
                     .font(notifier.titleFont)
@@ -114,8 +129,14 @@ public struct FloatingLabelTextField: View {
             }
             
             //MARK: Line View
-            Divider()
-                .frame(height: self.isSelected ? notifier.selectedLineHeight : notifier.lineHeight, alignment: .leading).background( self.isSelected ? notifier.selectedLineColor : notifier.lineColor)
+            if textFieldValue.isEmpty || !notifier.isShowError {
+                bottomLine
+                    .background((self.isSelected ? notifier.selectedLineColor : notifier.lineColor))
+                
+            } else {
+                bottomLine
+                    .background((self.currentError.condition) ? (self.isSelected ? notifier.selectedLineColor : notifier.lineColor) : notifier.errorColor)
+            }
             
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
@@ -256,7 +277,33 @@ extension FloatingLabelTextField {
     }
 }
 
-
+//MARK: Error Property Funcation
+@available(iOS 13.0, *)
+extension FloatingLabelTextField {
+    /// Sets the is show error message.
+    public func isShowError(_ show: Bool) -> Self {
+        notifier.isShowError = show
+        return self
+    }
+    
+    /// Sets the validation conditions.
+    public func addValidations(_ conditions: [TextFieldValidator]) -> Self {
+        notifier.arrValidator.append(contentsOf: conditions)
+        return self
+    }
+    
+    /// Sets the validation condition.
+    public func addValidation(_ condition: TextFieldValidator) -> Self {
+        notifier.arrValidator.append(condition)
+        return self
+    }
+    
+    /// Sets the error color.
+    public func errorColor(_ color: Color) -> Self {
+        notifier.errorColor = color
+        return self
+    }
+}
 
 //MARK: Preview
 //struct FloatingLabelTextField_Previews: PreviewProvider {

@@ -101,6 +101,7 @@ struct ThemeTextFieldStyle: FloatingLabelTextFieldStyle {
             .textFont(.system(size: 15)) // Sets the text font.
             .placeholderColor(.gray) // Sets the placeholder color.
             .placeholderFont(.system(size: 15)) // Sets the placeholder font.
+            .errorColor(.red) /// Sets the error color.
     }
 }
 ```
@@ -191,9 +192,86 @@ struct ContentView: View {
 }
 ```
 
-## 🔜 Coming soon
+#### Error Message & Validation
 
-- Error Message and Validation
+FloatingLableTextFieldSwiftUI supports displaying an error and add text field validations. This can be helpfull for adding validation on your form text field. To enable isShowError property to true and pass text field validations array to text field with message according condition. You can also add validation checker variable to check is text field is valid or not on submit button action.
+
+FloatingLabelTextFieldSwiftUI also have some inbuilt validation regex checker fields like email, password, name, number.. etc. 
+
+Here is some example
+
+1. Email Validation
+
+<p float="left">
+    <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/email_validation.gif">
+
+</p>
+
+```swift
+struct ContentView: View {
+    
+    @State private var email: String = ""
+    @State private var isValidEmail: Bool = false
+    
+    var body: some View {
+        VStack {
+            FloatingLabelTextField($email, validtionChecker: $isValidEmail, placeholder: "Email", editingChanged: { (isChanged) in
+                
+            }) {
+                
+            }
+            .addValidation(.init(condition: email.isValid(.email), errorMessage: "Invalid Email")) /// Sets the validation condition.
+                .isShowError(true) /// Sets the is show error message.
+                .errorColor(.red) /// Sets the error color.
+                .keyboardType(.emailAddress)
+                .frame(height: 70)
+                .padding()
+            
+            Button(action: {
+                self.endEditing(true)
+                
+                if self.isValidEmail {
+                    print("Valid Email")
+                    
+                } else {
+                    print("Invalid Email")
+                }
+                
+            }) {
+                Text("Create")
+            }
+        }
+    }
+}
+```
+
+2. Name Validation
+
+<p float="left">
+    <img src="https://github.com/kishanraja/FloatingLabelTextFieldSwiftUI/blob/master/Graphics/name_validation.gif">
+
+</p>
+
+```swift
+struct ContentView: View {
+    
+    @State private var lastName: String = ""
+    
+    var body: some View {
+        FloatingLabelTextField($lastName, placeholder: "Last Name", editingChanged: { (isChanged) in
+            
+        }) {
+            
+        }
+        .isShowError(true) /// Sets the is show error message.
+        .addValidations([.init(condition: lastName.isValid(.alphabet), errorMessage: "Invalid Name"),
+                         .init(condition: lastName.count >= 2, errorMessage: "Minimum two character long")
+        ]) /// Sets the validation conditions.
+            .floatingStyle(ThemeTextFieldStyle2())
+            .frame(height: 70)
+    }
+}
+```
 
 ## 🐾 Examples
 
