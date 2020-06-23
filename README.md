@@ -192,7 +192,7 @@ struct ContentView: View {
 }
 ```
 
-#### Error Message & Validation
+### Error Message & Validation
 
 FloatingLableTextFieldSwiftUI supports displaying an error and add text field validations. This can be helpfull for adding validation on your form text field. To enable isShowError property to true and pass text field validations array to text field with message according condition. You can also add validation checker variable to check is text field is valid or not on submit button action.
 
@@ -272,6 +272,7 @@ struct ContentView: View {
     }
 }
 ```
+
 
 ## 🐾 Examples
 
