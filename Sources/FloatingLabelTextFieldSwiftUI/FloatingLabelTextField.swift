@@ -22,12 +22,19 @@ public struct FloatingLabelTextField: View {
     @Binding private var textFieldValue: String
     @State fileprivate var isSelected: Bool = false
     @Binding private var validtionChecker: Bool
+    
     private var currentError: TextFieldValidator {
+        if notifier.isRequiredField && isShowError && textFieldValue.isEmpty {
+            return TextFieldValidator(condition: false, errorMessage: notifier.requiredFieldMessage)
+        }
+        
         if let firstError = notifier.arrValidator.filter({!$0.condition}).first {
             return firstError
         }
         return TextFieldValidator(condition: true, errorMessage: "")
     }
+    
+    @State fileprivate var isShowError: Bool = false
     
     //MARK: Observed Object
     @ObservedObject private var notifier = FloatingLabelTextFieldNotifier()
@@ -61,6 +68,7 @@ public struct FloatingLabelTextField: View {
                 SecureField("", text: $textFieldValue.animation()) {
                 }
                 .onTapGesture {
+                    self.isShowError = self.notifier.isRequiredField
                     self.validtionChecker = self.currentError.condition
                     self.editingChanged(self.isSelected)
                     if !self.isSelected {
@@ -71,6 +79,7 @@ public struct FloatingLabelTextField: View {
                             self.isSelected = self.notifier.isSecureTextEntry
                             currentTextField.addAction(for: .editingDidEnd) {
                                 self.isSelected = false
+                                self.isShowError = self.notifier.isRequiredField
                                 self.commit()
                             }
                         }
@@ -85,8 +94,10 @@ public struct FloatingLabelTextField: View {
                     self.isSelected = isChanged
                     self.validtionChecker = self.currentError.condition
                     self.editingChanged(isChanged)
+                    self.isShowError = self.notifier.isRequiredField
                     
                 }, onCommit: {
+                    self.isShowError = self.notifier.isRequiredField
                     self.validtionChecker = self.currentError.condition
                     self.commit()
                 })
@@ -95,6 +106,15 @@ public struct FloatingLabelTextField: View {
                     .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
             }
         }
+    }
+    
+    // MARK: Top error and title lable view
+    var topTitleLable: some View {
+        Text((self.currentError.condition || !notifier.isShowError) ? placeholderText : self.currentError.errorMessage)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: notifier.textAlignment.getAlignment())
+            .animation(.default)
+            .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor) : notifier.errorColor)
+            .font(notifier.titleFont)
     }
     
     // MARK: Bottom Line View
@@ -108,13 +128,13 @@ public struct FloatingLabelTextField: View {
         VStack () {
             ZStack(alignment: .bottomLeading) {
                 
-                Text((self.currentError.condition || !notifier.isShowError) ? placeholderText : self.currentError.errorMessage)
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: notifier.textAlignment.getAlignment())
-                    .animation(.default)
-                    .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor) : notifier.errorColor)
-                    .padding(.bottom, CGFloat(!textFieldValue.isEmpty ? notifier.spaceBetweenTitleText : 0))
-                    .opacity(textFieldValue.isEmpty ? 0 : 1)
-                    .font(notifier.titleFont)
+                //Top error and title lable view
+                if notifier.isShowError && self.isShowError && textFieldValue.isEmpty {
+                    self.topTitleLable.padding(.bottom, CGFloat(notifier.spaceBetweenTitleText)).opacity(1)
+                    
+                } else {
+                    self.topTitleLable.padding(.bottom, CGFloat(!textFieldValue.isEmpty ? notifier.spaceBetweenTitleText : 0)).opacity((textFieldValue.isEmpty) ? 0 : 1)
+                }
                 
                 HStack {
                     // Left View
@@ -301,6 +321,13 @@ extension FloatingLabelTextField {
     /// Sets the error color.
     public func errorColor(_ color: Color) -> Self {
         notifier.errorColor = color
+        return self
+    }
+    
+    /// Sets the field is required or not with message.
+    public func isRequiredField(_ required: Bool, with message: String) -> Self {
+        notifier.isRequiredField = required
+        notifier.requiredFieldMessage = message
         return self
     }
 }

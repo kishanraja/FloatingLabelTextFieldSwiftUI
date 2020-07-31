@@ -50,6 +50,7 @@ struct ContentView: View {
                 .addValidations([.init(condition: firstName.isValid(.alphabet), errorMessage: "Invalid Name"),
                                  .init(condition: firstName.count >= 2, errorMessage: "Minimum two character long")
                 ])
+                    .isRequiredField(true, with: "Name field is required")
                     .floatingStyle(ThemeTextFieldStyle())
                     .modifier(ThemeTextField())
                 
@@ -102,6 +103,8 @@ struct ContentView: View {
             }) {
                 
             }
+            .isShowError(true)
+            .isRequiredField(true, with: "Password field is required")
             .rightView({
                 Button(action: {
                     withAnimation {
