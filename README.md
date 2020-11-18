@@ -102,6 +102,7 @@ struct ThemeTextFieldStyle: FloatingLabelTextFieldStyle {
             .placeholderColor(.gray) // Sets the placeholder color.
             .placeholderFont(.system(size: 15)) // Sets the placeholder font.
             .errorColor(.red) /// Sets the error color.
+            .addDisableEditingAction([.paste]) /// Disable text field editing action. Like cut, copy, past, all etc.
     }
 }
 ```

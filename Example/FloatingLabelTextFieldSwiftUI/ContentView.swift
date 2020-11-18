@@ -46,13 +46,14 @@ struct ContentView: View {
                 }) {
                     
                 }
+                .addDisableEditingAction([.all])
                 .isShowError(true)
                 .addValidations([.init(condition: firstName.isValid(.alphabet), errorMessage: "Invalid Name"),
                                  .init(condition: firstName.count >= 2, errorMessage: "Minimum two character long")
                 ])
-                    .isRequiredField(true, with: "Name field is required")
-                    .floatingStyle(ThemeTextFieldStyle())
-                    .modifier(ThemeTextField())
+                .isRequiredField(true, with: "Name field is required")
+                .floatingStyle(ThemeTextFieldStyle())
+                .modifier(ThemeTextField())
                 
                 
                 FloatingLabelTextField($lastName, placeholder: "Last Name", editingChanged: { (isChanged) in
@@ -60,12 +61,13 @@ struct ContentView: View {
                 }) {
                     
                 }
+                .addDisableEditingAction([.paste])
                 .isShowError(true)
                 .addValidations([.init(condition: lastName.isValid(.alphabet), errorMessage: "Invalid Name"),
                                  .init(condition: lastName.count >= 2, errorMessage: "Minimum two character long")
                 ])
-                    .floatingStyle(ThemeTextFieldStyle2())
-                    .modifier(ThemeTextField())
+                .floatingStyle(ThemeTextFieldStyle2())
+                .modifier(ThemeTextField())
             }
             
             FloatingLabelTextField($birthDate, placeholder: "Birth Date", editingChanged: { (isChanged) in
@@ -85,6 +87,7 @@ struct ContentView: View {
             }) {
                 
             }
+            .addDisableEditingAction([.paste])
             .keyboardType(.phonePad)
             .modifier(ThemeTextField())
             FloatingLabelTextField($email, validtionChecker: $isValidEmail, placeholder: "Email", editingChanged: { (isChanged) in
@@ -94,15 +97,16 @@ struct ContentView: View {
             }
             .addValidations([.init(condition: email.isValid(.email), errorMessage: "Invalid Email")
             ])
-                .isShowError(true)
-                .keyboardType(.emailAddress)
-                .modifier(ThemeTextField())
+            .isShowError(true)
+            .keyboardType(.emailAddress)
+            .modifier(ThemeTextField())
             
             FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in
                 
             }) {
                 
             }
+            .addDisableEditingAction([.all])
             .isShowError(true)
             .isRequiredField(true, with: "Password field is required")
             .rightView({
@@ -115,8 +119,8 @@ struct ContentView: View {
                     Image(self.isPasswordShow ? "eye_close" : "eye_show")
                 }
             })
-                .isSecureTextEntry(!self.isPasswordShow)
-                .modifier(ThemeTextField())
+            .isSecureTextEntry(!self.isPasswordShow)
+            .modifier(ThemeTextField())
             //            SecureField("", text:  $password)
             //            Text(password)
             Button(action: {
@@ -135,7 +139,7 @@ struct ContentView: View {
             .buttonStyle(CreateButtonStyle())
             Spacer()
         }
-            
+        
         .padding()
         
     }

@@ -48,4 +48,7 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     @Published var arrValidator: [TextFieldValidator] = []
     @Published var isRequiredField: Bool = false
     @Published var requiredFieldMessage: String = ""
+    
+    //MARK: Action Editing Properties
+    @Published var arrTextFieldEditActions: [TextFieldEditActions] = []
 }

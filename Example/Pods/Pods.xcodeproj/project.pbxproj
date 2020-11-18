@@ -13,6 +13,7 @@
 		1EC95B678A0CEB64339DCD6A7282A499 /* Pods-FloatingLabelTextFieldSwiftUI_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 33B87B774B6B67EE2736D0B3DF2074CC /* Pods-FloatingLabelTextFieldSwiftUI_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25B2FD0FCD64AE18FB6BDD266758D3CB /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1447985B68B4F254BA91FE835F50987 /* View+Extension.swift */; };
 		529AC9170C1266E4CED03C7D4EF38DB8 /* TextAlignment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0E7DDCE1229A3A81653C4B0845FE /* TextAlignment+Extension.swift */; };
+		5D25032625652F2B00DC5927 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D25032525652F2B00DC5927 /* UITextField+Extension.swift */; };
 		5D3CE01F249BC5CE003DC54C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE01E249BC5CE003DC54C /* String+Extension.swift */; };
 		5D3CE056249BDB50003DC54C /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3CE055249BDB50003DC54C /* Validator.swift */; };
 		69330D52C647DC65452DE8BE13D6E743 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
@@ -54,6 +55,7 @@
 		379E19BC27CAD1B499B2626FA17DF32F /* Pods-FloatingLabelTextFieldSwiftUI_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FloatingLabelTextFieldSwiftUI_Example.release.xcconfig"; sourceTree = "<group>"; };
 		4EFE66E7FD8BADD7412A7F69C1AD9FE0 /* FloatingLabelTextFieldSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FloatingLabelTextFieldSwiftUI.debug.xcconfig; sourceTree = "<group>"; };
 		50DC2CB7FBD71A7CBF3786E72FF53A49 /* UIResponder+Extesnion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extesnion.swift"; sourceTree = "<group>"; };
+		5D25032525652F2B00DC5927 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		5D3CE01E249BC5CE003DC54C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5D3CE055249BDB50003DC54C /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		5DA2B90C9EF9C267037122FCBFFC32FB /* Pods-FloatingLabelTextFieldSwiftUI_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FloatingLabelTextFieldSwiftUI_Example-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				50DC2CB7FBD71A7CBF3786E72FF53A49 /* UIResponder+Extesnion.swift */,
 				A1447985B68B4F254BA91FE835F50987 /* View+Extension.swift */,
 				5D3CE01E249BC5CE003DC54C /* String+Extension.swift */,
+				5D25032525652F2B00DC5927 /* UITextField+Extension.swift */,
 			);
 			name = Extensions;
 			path = Sources/FloatingLabelTextFieldSwiftUI/Extensions;
@@ -436,6 +439,7 @@
 				EA1534356550BCA26D1F0E3A4316A6D1 /* FloatingLabelTextField.swift in Sources */,
 				B23D4D22E076BF2B1EE653CF63738C28 /* FloatingLabelTextFieldSwiftUI-dummy.m in Sources */,
 				0C6A91CB7E7B145CC7B93D895A7CA575 /* ObservableObject.swift in Sources */,
+				5D25032625652F2B00DC5927 /* UITextField+Extension.swift in Sources */,
 				529AC9170C1266E4CED03C7D4EF38DB8 /* TextAlignment+Extension.swift in Sources */,
 				78DCFBBED4CA94D1B49926ED23ACB7D1 /* UIControl+Extension.swift in Sources */,
 				047CB0BE0830C3359216F689E3BF986D /* UIResponder+Extesnion.swift in Sources */,

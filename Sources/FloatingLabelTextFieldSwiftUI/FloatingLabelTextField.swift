@@ -76,6 +76,7 @@ public struct FloatingLabelTextField: View {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         if let currentResponder = UIResponder.currentFirstResponder, let currentTextField = currentResponder.globalView as? UITextField{
+                            arrTextFieldEditActions = notifier.arrTextFieldEditActions
                             self.isSelected = self.notifier.isSecureTextEntry
                             currentTextField.addAction(for: .editingDidEnd) {
                                 self.isSelected = false
@@ -95,15 +96,15 @@ public struct FloatingLabelTextField: View {
                     self.validtionChecker = self.currentError.condition
                     self.editingChanged(isChanged)
                     self.isShowError = self.notifier.isRequiredField
-                    
+                    arrTextFieldEditActions = notifier.arrTextFieldEditActions
                 }, onCommit: {
                     self.isShowError = self.notifier.isRequiredField
                     self.validtionChecker = self.currentError.condition
                     self.commit()
                 })
-                    .multilineTextAlignment(notifier.textAlignment)
-                    .font(notifier.font)
-                    .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
+                .multilineTextAlignment(notifier.textAlignment)
+                .font(notifier.font)
+                .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
             }
         }
     }
@@ -332,9 +333,12 @@ extension FloatingLabelTextField {
     }
 }
 
-//MARK: Preview
-//struct FloatingLabelTextField_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FloatingLabelTextField()
-//    }
-//}
+//MARK: Text Field Editing Funcation
+@available(iOS 13.0, *)
+extension FloatingLabelTextField {
+    /// Disable text field editing action. Like cut, copy, past, all etc.
+    public func addDisableEditingAction(_ actions: [TextFieldEditActions]) -> Self {
+        notifier.arrTextFieldEditActions = actions
+        return self
+    }
+}
