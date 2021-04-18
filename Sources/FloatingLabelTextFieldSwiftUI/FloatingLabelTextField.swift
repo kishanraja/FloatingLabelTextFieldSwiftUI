@@ -36,6 +36,8 @@ public struct FloatingLabelTextField: View {
     
     @State fileprivate var isShowError: Bool = false
     
+    @State fileprivate var isFocused: Bool = false
+    
     //MARK: Observed Object
     @ObservedObject private var notifier = FloatingLabelTextFieldNotifier()
     
@@ -57,7 +59,7 @@ public struct FloatingLabelTextField: View {
     var centerTextFieldView: some View {
         ZStack(alignment: notifier.textAlignment.getAlignment()) {
             
-            if textFieldValue.isEmpty {
+            if (notifier.isAnimateOnFocus ? !isSelected : textFieldValue.isEmpty) {
                 Text(placeholderText)
                     .font(notifier.placeholderFont)
                     .multilineTextAlignment(notifier.textAlignment)
@@ -77,22 +79,31 @@ public struct FloatingLabelTextField: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         if let currentResponder = UIResponder.currentFirstResponder, let currentTextField = currentResponder.globalView as? UITextField{
                             arrTextFieldEditActions = self.notifier.arrTextFieldEditActions
-                            self.isSelected = self.notifier.isSecureTextEntry
+                            withAnimation {
+                                self.isSelected = self.notifier.isSecureTextEntry
+                            }
                             currentTextField.addAction(for: .editingDidEnd) {
                                 self.isSelected = false
                                 self.isShowError = self.notifier.isRequiredField
+                                self.validtionChecker = self.currentError.condition
                                 self.commit()
+                                arrTextFieldEditActions = []
                             }
                         }
                     }
                 }
+                .disabled(self.notifier.disabled)
+                .allowsHitTesting(self.notifier.allowsHitTesting)
                 .font(notifier.font)
                 .multilineTextAlignment(notifier.textAlignment)
                 .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
                 
             } else {
                 TextField("", text: $textFieldValue.animation(), onEditingChanged: { (isChanged) in
-                    self.isSelected = isChanged
+                    withAnimation {
+                        self.isSelected = isChanged
+                    }
+                    
                     self.validtionChecker = self.currentError.condition
                     self.editingChanged(isChanged)
                     self.isShowError = self.notifier.isRequiredField
@@ -101,7 +112,10 @@ public struct FloatingLabelTextField: View {
                     self.isShowError = self.notifier.isRequiredField
                     self.validtionChecker = self.currentError.condition
                     self.commit()
+                    arrTextFieldEditActions = []
                 })
+                .disabled(self.notifier.disabled)
+                .allowsHitTesting(self.notifier.allowsHitTesting)
                 .multilineTextAlignment(notifier.textAlignment)
                 .font(notifier.font)
                 .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
@@ -130,7 +144,7 @@ public struct FloatingLabelTextField: View {
             ZStack(alignment: .bottomLeading) {
                 
                 //Top error and title lable view
-                if notifier.isShowError && self.isShowError && textFieldValue.isEmpty {
+                if notifier.isShowError && self.isShowError && textFieldValue.isEmpty || (notifier.isAnimateOnFocus && isSelected){
                     self.topTitleLable.padding(.bottom, CGFloat(notifier.spaceBetweenTitleText)).opacity(1)
                     
                 } else {
@@ -200,6 +214,18 @@ extension FloatingLabelTextField {
     /// Sets the secure text entry for TextField.
     public func isSecureTextEntry(_ isSecure: Bool) -> Self {
         notifier.isSecureTextEntry = isSecure
+        return self
+    }
+    
+    /// Whether users can interact with this.
+    public func disabled(_ isDisabled: Bool) -> Self {
+        notifier.disabled = isDisabled
+        return self
+    }
+    
+    /// Whether this view participates in hit test operations.
+    public func allowsHitTesting(_ isAllowsHitTesting: Bool) -> Self {
+        notifier.allowsHitTesting = isAllowsHitTesting
         return self
     }
 }
@@ -342,3 +368,14 @@ extension FloatingLabelTextField {
         return self
     }
 }
+
+//MARK: Animation Style Funcation
+@available(iOS 13.0, *)
+extension FloatingLabelTextField {
+    /// Enable the placeholder label when the textfield is focused.
+    public func enablePlaceholderOnFocus(_ isEanble: Bool) -> Self {
+        notifier.isAnimateOnFocus = isEanble
+        return self
+    }
+}
+

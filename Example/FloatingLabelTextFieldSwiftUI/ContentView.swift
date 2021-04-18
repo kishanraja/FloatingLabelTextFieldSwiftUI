@@ -12,7 +12,11 @@ import FloatingLabelTextFieldSwiftUI
 struct ContentView: View {
     
     @State private var firstName: String = ""
+    @State private var isValidFirstName: Bool = false
+    
     @State private var lastName: String = ""
+    @State private var isValidLastName: Bool = false
+    
     @State private var mobileNumber: String = ""
     @State private var email: String = ""
     @State private var isValidEmail: Bool = false
@@ -41,7 +45,7 @@ struct ContentView: View {
         VStack {
             
             HStack(spacing: 20) {
-                FloatingLabelTextField($firstName, placeholder: "First Name", editingChanged: { (isChanged) in
+                FloatingLabelTextField($firstName, validtionChecker: $isValidFirstName, placeholder: "First Name", editingChanged: { (isChanged) in
                     
                 }) {
                     
@@ -56,7 +60,7 @@ struct ContentView: View {
                 .modifier(ThemeTextField())
                 
                 
-                FloatingLabelTextField($lastName, placeholder: "Last Name", editingChanged: { (isChanged) in
+                FloatingLabelTextField($lastName, validtionChecker: $isValidLastName, placeholder: "Last Name", editingChanged: { (isChanged) in
                     
                 }) {
                     
@@ -121,12 +125,15 @@ struct ContentView: View {
             })
             .isSecureTextEntry(!self.isPasswordShow)
             .modifier(ThemeTextField())
-            //            SecureField("", text:  $password)
-            //            Text(password)
+            
             Button(action: {
                 self.endEditing(true)
                 
-                if self.isValidEmail {
+                print("First Name--->", isValidFirstName)
+                print("Last Name--->", isValidLastName)
+                print("Email--->", isValidEmail)
+                
+                if self.isValidEmail && isValidFirstName && isValidLastName {
                     print("Valid field")
                     
                 } else {

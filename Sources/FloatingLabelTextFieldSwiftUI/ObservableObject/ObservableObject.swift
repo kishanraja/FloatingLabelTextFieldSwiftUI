@@ -41,6 +41,8 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     //MARK: Other Properties
     @Published var spaceBetweenTitleText: Double = 15
     @Published var isSecureTextEntry: Bool = false
+    @Published var disabled: Bool = false
+    @Published var allowsHitTesting: Bool = true
     
     //MARK: Error Properties
     @Published var isShowError: Bool = false
@@ -51,4 +53,7 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     
     //MARK: Action Editing Properties
     @Published var arrTextFieldEditActions: [TextFieldEditActions] = []
+    
+    //MARK: Animation Style Properties
+    @Published var isAnimateOnFocus: Bool = false
 }
