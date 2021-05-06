@@ -59,7 +59,7 @@ public struct FloatingLabelTextField: View {
     var centerTextFieldView: some View {
         ZStack(alignment: notifier.textAlignment.getAlignment()) {
             
-            if (notifier.isAnimateOnFocus ? !isSelected : textFieldValue.isEmpty) {
+            if (notifier.isAnimateOnFocus ? (!isSelected && textFieldValue.isEmpty) : textFieldValue.isEmpty) {
                 Text(placeholderText)
                     .font(notifier.placeholderFont)
                     .multilineTextAlignment(notifier.textAlignment)
