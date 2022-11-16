@@ -111,7 +111,7 @@ struct ContentView: View {
             FloatingLabelTextField($notes, placeholder: "Notes", axis: .vertical)
                 .spaceBetweenTitleText(8.0)
                 .lineLimit(5)
-//                .frame(maxHeight: 200)
+                .frame(minHeight: 80)
 
             FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in
                 
