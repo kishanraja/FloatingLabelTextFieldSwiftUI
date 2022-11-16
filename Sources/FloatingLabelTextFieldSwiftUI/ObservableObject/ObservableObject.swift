@@ -33,6 +33,7 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     @Published var textColor: Color = .black
     @Published var selectedTextColor: Color = .blue
     @Published var font: Font = .system(size: 15)
+    @Published var lineLimit: Int = 1
     
     //MARK: Placeholder Properties
     @Published var placeholderColor: Color = .gray

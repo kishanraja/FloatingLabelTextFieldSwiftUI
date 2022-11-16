@@ -9,13 +9,13 @@
 import SwiftUI
 
 //MARK: FloatingLabelTextField Style Protocol
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public protocol FloatingLabelTextFieldStyle {
     func body(content: FloatingLabelTextField) -> FloatingLabelTextField
 }
 
 //MARK: FloatingLabelTextField View
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 public struct FloatingLabelTextField: View {
 
     //MARK: Binding Property
@@ -35,21 +35,24 @@ public struct FloatingLabelTextField: View {
     }
 
     @State var isShowError: Bool = false
-
-    @State fileprivate var isFocused: Bool = false
+    @FocusState fileprivate var isFocused: Bool
+    @State private var textFieldHeight: CGFloat = 0.0
 
     //MARK: Observed Object
     @ObservedObject private var notifier = FloatingLabelTextFieldNotifier()
 
     //MARK: Properties
+    private let axis: Axis
     private var placeholderText: String = ""
     private var editingChanged: (Bool) -> () = { _ in }
     private var commit: () -> () = { }
 
     //MARK: Init
-    public init(_ text: Binding<String>, validtionChecker: Binding<Bool>? = nil, placeholder: String = "", editingChanged: @escaping (Bool)->() = { _ in }, commit: @escaping ()->() = { }) {
+    public init(_ text: Binding<String>, validtionChecker: Binding<Bool>? = nil, placeholder: String = "",
+                axis: Axis = .horizontal, editingChanged: @escaping (Bool)->() = { _ in }, commit: @escaping ()->() = { }) {
         self._textFieldValue = text
         self.placeholderText = placeholder
+        self.axis = axis
         self.editingChanged = editingChanged
         self.commit = commit
         self._validtionChecker = validtionChecker ?? Binding.constant(false)
@@ -99,7 +102,9 @@ public struct FloatingLabelTextField: View {
                 .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
 
             } else {
-                TextField("", text: $textFieldValue.animation(), onEditingChanged: { (isChanged) in
+                TextField("", text: $textFieldValue.animation(), axis: axis)
+                .focused($isFocused)
+                .onChange(of: isFocused, perform: { (isChanged) in
                     withAnimation {
                         DispatchQueue.main.async {
                             self.isSelected = isChanged
@@ -113,25 +118,37 @@ public struct FloatingLabelTextField: View {
                     self.validtionChecker = self.currentError.condition
                     self.editingChanged(isChanged)
                     arrTextFieldEditActions = self.notifier.arrTextFieldEditActions
-                }, onCommit: {
+                })
+                .onSubmit({
                     self.isShowError = self.notifier.isRequiredField
                     self.validtionChecker = self.currentError.condition
                     self.commit()
                     arrTextFieldEditActions = []
                 })
+                .lineLimit(notifier.lineLimit)
                 .disabled(self.notifier.disabled)
                 .allowsHitTesting(self.notifier.allowsHitTesting)
                 .multilineTextAlignment(notifier.textAlignment)
                 .font(notifier.font)
                 .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
+                .background(
+                    GeometryReader(content: set(geometry:))
+                )
             }
         }
+    }
+
+    private func set(geometry: GeometryProxy) -> some View {
+        DispatchQueue.main.async {
+            self.textFieldHeight = geometry.size.height
+        }
+        return Color.clear
     }
 
     // MARK: Top error and title lable view
     var topTitleLable: some View {
         Text((self.currentError.condition || !notifier.isShowError) ? placeholderText : self.currentError.errorMessage)
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: notifier.textAlignment.getAlignment())
+            .frame(alignment: notifier.textAlignment.getAlignment())
             .animation(.default)
             .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor) : notifier.errorColor)
             .font(notifier.titleFont)
@@ -153,7 +170,9 @@ public struct FloatingLabelTextField: View {
                     self.topTitleLable.padding(.bottom, CGFloat(notifier.spaceBetweenTitleText)).opacity(1)
 
                 } else {
-                    self.topTitleLable.padding(.bottom, CGFloat(!textFieldValue.isEmpty ? notifier.spaceBetweenTitleText : 0)).opacity((textFieldValue.isEmpty) ? 0 : 1)
+                    let padding = notifier.spaceBetweenTitleText + (axis == .vertical ? textFieldHeight : 0)
+                    self.topTitleLable.padding(.bottom, !textFieldValue.isEmpty ? padding : 0)
+                    .opacity((textFieldValue.isEmpty) ? 0 : 1)
                 }
 
                 HStack {
@@ -179,12 +198,12 @@ public struct FloatingLabelTextField: View {
             }
 
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
+        .frame(alignment: .bottomLeading)
     }
 }
 
 //MARK: FloatingLabelTextField Style Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     public func floatingStyle<S>(_ style: S) -> some View where S: FloatingLabelTextFieldStyle {
         return style.body(content: self)
@@ -192,7 +211,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: View Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the left view.
     public func leftView<LRView: View>(@ViewBuilder _ view: @escaping () -> LRView) -> Self {
@@ -208,7 +227,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Text Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the alignment for text.
     public func textAlignment(_ alignment: TextAlignment) -> Self {
@@ -233,10 +252,15 @@ extension FloatingLabelTextField {
         notifier.allowsHitTesting = isAllowsHitTesting
         return self
     }
+
+    public func lineLimit(_ limit: Int) -> Self {
+        notifier.lineLimit = limit
+        return self
+    }
 }
 
 //MARK: Line Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the line height.
     public func lineHeight(_ height: CGFloat) -> Self {
@@ -264,7 +288,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Title Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the title color.
     public func titleColor(_ color: Color) -> Self {
@@ -292,7 +316,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Text Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the text color.
     public func textColor(_ color: Color) -> Self {
@@ -314,7 +338,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Placeholder Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the placeholder color.
     public func placeholderColor(_ color: Color) -> Self {
@@ -330,7 +354,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Error Property Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Sets the is show error message.
     public func isShowError(_ show: Bool) -> Self {
@@ -365,7 +389,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Text Field Editing Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Disable text field editing action. Like cut, copy, past, all etc.
     public func addDisableEditingAction(_ actions: [TextFieldEditActions]) -> Self {
@@ -375,7 +399,7 @@ extension FloatingLabelTextField {
 }
 
 //MARK: Animation Style Funcation
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 extension FloatingLabelTextField {
     /// Enable the placeholder label when the textfield is focused.
     public func enablePlaceholderOnFocus(_ isEanble: Bool) -> Self {
