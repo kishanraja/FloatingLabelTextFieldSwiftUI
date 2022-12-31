@@ -33,13 +33,14 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     @Published var textColor: Color = .black
     @Published var selectedTextColor: Color = .blue
     @Published var font: Font = .system(size: 15)
+    @Published var lineLimit: Int = 1
     
     //MARK: Placeholder Properties
     @Published var placeholderColor: Color = .gray
     @Published var placeholderFont: Font = .system(size: 15)
     
     //MARK: Other Properties
-    @Published var spaceBetweenTitleText: Double = 15
+    @Published var spaceBetweenTitleText: Double = 30
     @Published var isSecureTextEntry: Bool = false
     @Published var disabled: Bool = false
     @Published var allowsHitTesting: Bool = true

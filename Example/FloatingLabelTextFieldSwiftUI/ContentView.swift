@@ -26,6 +26,8 @@ struct ContentView: View {
     @State private var showDatePicker: Bool = false
     
     @State private var isPasswordShow: Bool = false
+
+    @State private var notes: String = ""
     
     private var selectedDate: Binding<Date> {
         Binding<Date>(get: { self.date}, set : {
@@ -105,6 +107,12 @@ struct ContentView: View {
             .keyboardType(.emailAddress)
             .modifier(ThemeTextField())
             
+
+            FloatingLabelTextField($notes, placeholder: "Notes", axis: .vertical)
+                .spaceBetweenTitleText(8.0)
+                .lineLimit(5)
+                .frame(minHeight: 80)
+
             FloatingLabelTextField($password, placeholder: "Password", editingChanged: { (isChanged) in
                 
             }) {
@@ -142,7 +150,7 @@ struct ContentView: View {
                 
             }) {
                 Text("Create")
-            }
+            }   
             .buttonStyle(CreateButtonStyle())
             Spacer()
         }
