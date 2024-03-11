@@ -61,7 +61,7 @@ public struct FloatingLabelTextField: View {
             
             if (notifier.isAnimateOnFocus ? (!isSelected && textFieldValue.isEmpty) : textFieldValue.isEmpty) {
                 Text(placeholderText)
-                    .font(notifier.placeholderFont)
+                    .font(Font(notifier.placeholderFont))
                     .multilineTextAlignment(notifier.textAlignment)
                     .foregroundColor(notifier.placeholderColor)
             }
@@ -94,7 +94,7 @@ public struct FloatingLabelTextField: View {
                 }
                 .disabled(self.notifier.disabled)
                 .allowsHitTesting(self.notifier.allowsHitTesting)
-                .font(notifier.font)
+                .font(Font(notifier.font))
                 .multilineTextAlignment(notifier.textAlignment)
                 .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
                 
@@ -117,7 +117,7 @@ public struct FloatingLabelTextField: View {
                 .disabled(self.notifier.disabled)
                 .allowsHitTesting(self.notifier.allowsHitTesting)
                 .multilineTextAlignment(notifier.textAlignment)
-                .font(notifier.font)
+                .font(Font(notifier.font))
                 .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (isSelected ? notifier.selectedTextColor : notifier.textColor) : notifier.errorColor)
             }
         }
@@ -125,11 +125,27 @@ public struct FloatingLabelTextField: View {
     
     // MARK: Top error and title lable view
     var topTitleLable: some View {
-        Text((self.currentError.condition || !notifier.isShowError) ? placeholderText : self.currentError.errorMessage)
+        let titleMessage = (self.currentError.condition || !notifier.isShowError)
+        ? placeholderText
+        : self.currentError.errorMessage
+        
+        let messageColor = (self.currentError.condition || !notifier.isShowError)
+        ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor)
+        : notifier.errorColor
+        
+        let attributedString = NSMutableAttributedString(string: " " + titleMessage + " ")
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor(messageColor),
+            .backgroundColor: UIColor.white,
+            .font: notifier.titleFont
+        ]
+        attributedString.addAttributes(attributes,
+                                       range: .init(location: 0, length: titleMessage.count + 2))
+        return AttributedText(attributedString: attributedString)
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: notifier.textAlignment.getAlignment())
             .animation(.default)
-            .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor) : notifier.errorColor)
-            .font(notifier.titleFont)
+            // .foregroundColor((self.currentError.condition || !notifier.isShowError) ? (self.isSelected ? notifier.selectedTitleColor : notifier.titleColor) : notifier.errorColor)
+            // .font(Font(notifier.titleFont))
     }
     
     // MARK: Bottom Line View
@@ -140,7 +156,7 @@ public struct FloatingLabelTextField: View {
     
     //MARK: Body View
     public var body: some View {
-        VStack () {
+        VStack {
             ZStack(alignment: .bottomLeading) {
                 
                 //Top error and title lable view
@@ -161,16 +177,28 @@ public struct FloatingLabelTextField: View {
                     //Right View
                     notifier.rightView
                 }
+                .padding(.leading, 2.0)
+            }
+            .if(notifier.borderStyle == .roundedRect) { conditionalView in
+                conditionalView
+                    .padding(.horizontal, 8.0)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(.yellow, lineWidth: 1.0)
+                            .offset(y: 10)
+                            .padding(.top, 18.0)
+                    )
             }
             
             //MARK: Line View
-            if textFieldValue.isEmpty || !notifier.isShowError {
-                bottomLine
-                    .background((self.isSelected ? notifier.selectedLineColor : notifier.lineColor))
-                
-            } else {
-                bottomLine
-                    .background((self.currentError.condition) ? (self.isSelected ? notifier.selectedLineColor : notifier.lineColor) : notifier.errorColor)
+            if notifier.borderStyle == .line {
+                if textFieldValue.isEmpty || !notifier.isShowError {
+                    bottomLine
+                        .background((self.isSelected ? notifier.selectedLineColor : notifier.lineColor))
+                } else {
+                    bottomLine
+                        .background((self.currentError.condition) ? (self.isSelected ? notifier.selectedLineColor : notifier.lineColor) : notifier.errorColor)
+                }
             }
             
         }
@@ -274,7 +302,7 @@ extension FloatingLabelTextField {
     }
     
     /// Sets the title font.
-    public func titleFont(_ font: Font) -> Self {
+    public func titleFont(_ font: UIFont) -> Self {
         notifier.titleFont = font
         return self
     }
@@ -302,7 +330,7 @@ extension FloatingLabelTextField {
     }
     
     /// Sets the text font.
-    public func textFont(_ font: Font) -> Self {
+    public func textFont(_ font: UIFont) -> Self {
         notifier.font = font
         return self
     }
@@ -318,7 +346,7 @@ extension FloatingLabelTextField {
     }
     
     /// Sets the placeholder font.
-    public func placeholderFont(_ font: Font) -> Self {
+    public func placeholderFont(_ font: UIFont) -> Self {
         notifier.placeholderFont = font
         return self
     }
@@ -357,6 +385,11 @@ extension FloatingLabelTextField {
         notifier.requiredFieldMessage = message
         return self
     }
+    
+    public func borderStyle(_ style: BorderStyle) -> Self {
+        notifier.borderStyle = style
+        return self
+    }
 }
 
 //MARK: Text Field Editing Funcation
@@ -379,3 +412,35 @@ extension FloatingLabelTextField {
     }
 }
 
+struct AttributedText: UIViewRepresentable {
+    
+    let attributedString: NSMutableAttributedString
+    
+    func makeUIView(context: Context) -> UILabel {
+        let label = UILabel()
+        label.attributedText = attributedString
+        return label
+    }
+    
+    func updateUIView(_ uiView: UILabel, context: Context) {}
+}
+
+public enum BorderStyle: String {
+    case line
+    case roundedRect
+}
+
+extension View {
+    /// Applies the given transform if the given condition evaluates to `true`.
+    /// - Parameters:
+    ///   - condition: The condition to evaluate.
+    ///   - transform: The transform to apply to the source `View`.
+    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}

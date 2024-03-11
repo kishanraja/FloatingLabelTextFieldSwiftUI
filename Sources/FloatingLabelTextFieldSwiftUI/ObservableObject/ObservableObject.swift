@@ -27,19 +27,21 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     //MARK: Title Properties
     @Published var titleColor: Color = .gray
     @Published var selectedTitleColor: Color = .blue
-    @Published var titleFont: Font = .system(size: 12)
+    @Published var titleFont: UIFont = .systemFont(ofSize: 12.0)
     
     //MARK: Text Properties
     @Published var textColor: Color = .black
     @Published var selectedTextColor: Color = .blue
-    @Published var font: Font = .system(size: 15)
+    @Published var font: UIFont = .systemFont(ofSize: 15)
     
     //MARK: Placeholder Properties
     @Published var placeholderColor: Color = .gray
-    @Published var placeholderFont: Font = .system(size: 15)
+    @Published var placeholderFont: UIFont = .systemFont(ofSize: 15)
     
     //MARK: Other Properties
-    @Published var spaceBetweenTitleText: Double = 15
+    lazy var spaceBetweenTitleText: Double = {
+        borderStyle == .line ? 15.0 : 7.0
+    }()
     @Published var isSecureTextEntry: Bool = false
     @Published var disabled: Bool = false
     @Published var allowsHitTesting: Bool = true
@@ -50,6 +52,7 @@ class FloatingLabelTextFieldNotifier: ObservableObject {
     @Published var arrValidator: [TextFieldValidator] = []
     @Published var isRequiredField: Bool = false
     @Published var requiredFieldMessage: String = ""
+    @Published var borderStyle: BorderStyle = .line
     
     //MARK: Action Editing Properties
     @Published var arrTextFieldEditActions: [TextFieldEditActions] = []

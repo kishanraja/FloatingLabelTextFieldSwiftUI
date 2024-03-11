@@ -578,7 +578,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/FloatingLabelTextFieldSwiftUI/FloatingLabelTextFieldSwiftUI-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FloatingLabelTextFieldSwiftUI/FloatingLabelTextFieldSwiftUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FloatingLabelTextFieldSwiftUI/FloatingLabelTextFieldSwiftUI.modulemap";
 				PRODUCT_MODULE_NAME = FloatingLabelTextFieldSwiftUI;
@@ -646,7 +646,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/FloatingLabelTextFieldSwiftUI/FloatingLabelTextFieldSwiftUI-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FloatingLabelTextFieldSwiftUI/FloatingLabelTextFieldSwiftUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FloatingLabelTextFieldSwiftUI/FloatingLabelTextFieldSwiftUI.modulemap";
 				PRODUCT_MODULE_NAME = FloatingLabelTextFieldSwiftUI;

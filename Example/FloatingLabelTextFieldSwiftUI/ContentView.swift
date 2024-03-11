@@ -156,7 +156,10 @@ struct ContentView: View {
 //MARK: Create floating style
 struct ThemeTextFieldStyle: FloatingLabelTextFieldStyle {
     func body(content: FloatingLabelTextField) -> FloatingLabelTextField {
-        content.titleColor(.black)
+        content
+            .lineColor(.clear) // Sets the line color.
+            .selectedLineColor(.clear)
+            .borderStyle(.roundedRect)
     }
 }
 
@@ -169,7 +172,7 @@ struct ThemeTextFieldStyle2: FloatingLabelTextFieldStyle {
 //MARK: ViewModifier
 struct ThemeTextField: ViewModifier {
     func body(content: Content) -> some View {
-        content.frame(height: 80)
+        content.frame(height: 60)
     }
 }
 
@@ -181,12 +184,5 @@ struct CreateButtonStyle: ButtonStyle {
             .padding()
             .background(Color.orange)
             .cornerRadius(10.0)
-    }
-}
-
-//MARK: Preview
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
